@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/alexe/CLionProjects/project3/DNA.h
+string
+-
+iostream
+-
+iomanip
+-
+cmath
+-
+
+C:/Users/alexe/CLionProjects/project3/Sequencer.cpp
+Sequencer.h
+C:/Users/alexe/CLionProjects/project3/Sequencer.h
+
+C:/Users/alexe/CLionProjects/project3/Sequencer.h
+DNA.h
+C:/Users/alexe/CLionProjects/project3/DNA.h
+fstream
+-
+string
+-
+iostream
+-
+cstdlib
+-
+vector
+-
+

@@ -1,0 +1,317 @@
+    Node *temp = new Node(); //Builds a new node
+    temp->m_data = data;
+    //temp->m_next = nullptr;
+
+    if(m_head == nullptr){
+        m_head = temp;
+        m_tail = temp;
+    }else{
+        Node *curr = m_head;
+        while (curr != nullptr){
+            curr = curr->m_next;
+        }
+        curr->m_next = temp;
+        temp->m_next = nullptr;
+        m_tail = temp;
+
+
+
+
+                if (currentString[0] == 'S'){
+                    m_suspects.push_back(placeholder);
+                    //getline(infile, suspect);
+                    //placeholder = DNA(currentString);
+                    //placeholder->InsertEnd()
+                    //m_suspects[0] =  placeholder;
+
+
+
+
+
+    ifstream infile(m_fileName);
+    if (infile.is_open()){
+        while(!infile.eof()){
+            DNA *placeholder = new DNA;
+            if (counter % 2 == 1){
+                getline(infile, currentString);
+                if (currentString[0] == 'S'){
+                    m_suspects.push_back(placeholder);
+                }
+                if (currentString[0] == 'E'){
+                    m_evidence.push_back(placeholder);
+                }
+            }
+            if (counter % 2 == 0){
+
+            }
+
+            counter++;
+        }
+
+    }
+
+    m_suspects[s]->CompareSequence(m_evidence[e])
+    m_suspects[s]->CompareSequence(reinterpret_cast<DNA &>(m_evidence[e]))
+
+
+
+
+    ostream &operator<<(ostream &output, DNA &myDNA) {
+        int listSize;
+        char currentChar = '\n';
+
+        cout << "this ran" << endl;
+        listSize = myDNA.m_size;
+        output << myDNA.m_name << endl;
+        for(int nodeNum = 0; nodeNum < listSize; nodeNum++){
+            Node *curr = myDNA.m_head;
+            int counter = 0;
+            char foundCharacter;
+
+            cout << "GETDATA IS RAN on: " << curr->m_data << endl;
+            while(curr != nullptr){
+                currentChar = curr->m_data;
+                curr = curr->m_next;
+                counter++;
+                output << currentChar << "->";
+            }
+
+
+            //cout << "loop run" << endl;
+            //currentChar = myDNA.GetData(i);
+        }
+        output << endl;
+
+        return output;
+    }
+
+
+
+
+
+
+
+bool DNA::CompareSequence(DNA &evidence) {
+Node *susCurr = m_head;
+Node *eviCurr = evidence.m_head;
+int targetSize = evidence.m_size;
+int matchesFound = 0;
+bool foundMatch = false;
+char currentEviChar;
+char currentSusChar;
+char nextEviChar;
+char nextSusChar;
+
+while(susCurr != nullptr && !foundMatch){
+    while(eviCurr != nullptr  && susCurr != nullptr){
+        currentEviChar = eviCurr->m_data;
+        currentSusChar = susCurr->m_data;
+        cout << m_name << ": " << currentSusChar << " | " << evidence.m_name << ": " << currentEviChar << endl;
+        if(currentEviChar == currentSusChar){
+            eviCurr = eviCurr->m_next;
+            susCurr = susCurr->m_next;
+            matchesFound++;
+            if (matchesFound == targetSize){
+                foundMatch = true;
+            }
+        }else{
+            susCurr = susCurr->m_next;
+            eviCurr = evidence.m_head;
+            matchesFound = 0;
+        }
+    }
+}
+return foundMatch;
+}
+
+
+----------------------------------------------------------------
+bool DNA::CompareSequence(DNA &evidence) {
+Node *susCurr = m_head;
+Node *eviCurr = evidence.m_head;
+int targetSize = evidence.m_size;
+int matchesFound = 0;
+bool foundMatch = false;
+char currentEviChar;
+char currentSusChar;
+char nextEviChar;
+char nextSusChar;
+int counter = 0;
+
+while(susCurr != nullptr && !foundMatch){
+    while(eviCurr != nullptr  && susCurr != nullptr){
+        if (counter > 0)
+            cout << "Previous evi char: " << currentEviChar << endl;
+        currentEviChar = eviCurr->m_data;
+        currentSusChar = susCurr->m_data;
+        cout << m_name << ": " << currentSusChar << " | " << evidence.m_name << ": " << currentEviChar << " | ";
+        if(currentEviChar == currentSusChar){
+            cout << "Moved evi forward... Old: " << eviCurr->m_data << " | New: ";
+            eviCurr = eviCurr->m_next;
+            susCurr = susCurr->m_next;
+            cout << eviCurr->m_data << " | ";
+            if(eviCurr != nullptr && susCurr != nullptr){
+                nextEviChar = eviCurr->m_data;
+                nextSusChar = susCurr->m_data;
+                cout << "FOUND MATCH...Next evi: " << nextEviChar << endl;
+                //if (nextEviChar != nextSusChar){
+                    //cout << "EVI RESET" << endl;
+                    //eviCurr = evidence.m_head;
+                //}
+            }else{
+                cout << "Did not move to next" << endl;
+            }
+            matchesFound++;
+            if (matchesFound == targetSize){
+                foundMatch = true;
+            }
+        }else{
+            cout << "Did not find match | ";
+            susCurr = susCurr->m_next;
+            cout << "EVI RESET 2" << endl;
+            eviCurr = evidence.m_head;
+            matchesFound = 0;
+        }
+        counter++;
+    }
+}
+return foundMatch;
+}
+
+
+----------------------------------------------------------------------------
+bool DNA::CompareSequence(DNA &evidence) {
+    Node *susCurr = m_head;
+    Node *eviCurr = evidence.m_head;
+    Node *originalSus;
+    int targetSize = evidence.m_size;
+    int matchesFound = 1;
+    bool foundMatch = false;
+    char currentEviChar;
+    char currentSusChar;
+    char nextEviChar;
+    char nextSusChar;
+
+    while(susCurr != nullptr && !foundMatch){
+        while(eviCurr != nullptr  && susCurr != nullptr){
+            currentEviChar = eviCurr->m_data;
+            currentSusChar = susCurr->m_data;
+            cout << m_name << ": " << currentSusChar << " | " << evidence.m_name << ": " << currentEviChar << endl;
+            originalSus = susCurr;
+            cout << "This target size is: " << targetSize << endl;
+            while((eviCurr->m_data == susCurr->m_data) && (eviCurr->m_next != nullptr)){
+                cout << "Matches found: " << matchesFound << " at " << eviCurr->m_data << endl;
+                eviCurr = eviCurr->m_next;
+                susCurr = susCurr->m_next;
+                matchesFound++;
+                if (matchesFound == targetSize){
+                    foundMatch = true;
+                }
+                cout << "New evi curr char: " << eviCurr->m_data << endl;
+            }
+            //susCurr = originalSus;
+            if(!foundMatch)
+                susCurr = originalSus->m_next;
+            eviCurr = evidence.m_head;
+            matchesFound = 1;
+            }
+        }
+    return foundMatch;
+}
+
+------------------------------------------------------------------------
+WORKING but not for 4
+bool DNA::CompareSequence(DNA &evidence) {
+    Node *susCurr = m_head;
+    Node *eviCurr = evidence.m_head;
+    Node *originalSus;
+    int targetSize = evidence.m_size;
+    int matchesFound = 1;
+    bool foundMatch = false;
+    char currentEviChar;
+    char currentSusChar;
+    char nextEviChar;
+    char nextSusChar;
+
+    while(susCurr != nullptr && !foundMatch){
+        while(eviCurr != nullptr  && susCurr != nullptr)
+        {
+            currentEviChar = eviCurr->m_data;
+            currentSusChar = susCurr->m_data;
+            //cout << m_name << ": " << currentSusChar << " | " << evidence.m_name << ": " << currentEviChar << endl;
+            originalSus = susCurr;
+            //cout << "This target size is: " << targetSize << endl;
+            while((eviCurr->m_data == susCurr->m_data) && (eviCurr->m_next != nullptr))
+            {
+                //cout << "Matches found: " << matchesFound << " at " << eviCurr->m_data << endl;
+                eviCurr = eviCurr->m_next;
+                susCurr = susCurr->m_next;
+                matchesFound++;
+                if (matchesFound == targetSize){
+                    foundMatch = true;
+                }
+                //cout << "New evi curr char: " << eviCurr->m_data << endl;
+            }
+
+            if(foundMatch) {
+                susCurr = nullptr;
+            }else{
+                susCurr = originalSus->m_next;
+            }
+            eviCurr = evidence.m_head;
+            matchesFound = 1;
+            }
+        }
+    return foundMatch;
+}
+
+-----------------------------------------------------------
+COMPLETELY WORKS with couts
+bool DNA::CompareSequence(DNA &evidence) {
+    Node *susCurr = m_head;
+    Node *eviCurr = evidence.m_head;
+    Node *originalSus;
+    int targetSize = evidence.m_size;
+    int matchesFound = 1;
+    bool foundMatch = false;
+    char currentEviChar;
+    char currentSusChar;
+    char nextEviChar;
+    char nextSusChar;
+
+    while(susCurr != nullptr && !foundMatch){
+        while(eviCurr != nullptr  && susCurr != nullptr)
+        {
+            currentEviChar = eviCurr->m_data;
+            currentSusChar = susCurr->m_data;
+            //cout << m_name << ": " << currentSusChar << " | " << evidence.m_name << ": " << currentEviChar << endl;
+            originalSus = susCurr;
+            //cout << "This target size is: " << targetSize << endl;
+            while((currentEviChar == currentSusChar) && (eviCurr->m_next != nullptr) && (susCurr->m_next != nullptr))
+            {
+                //cout << "Matches found: " << matchesFound << " | Suspect: " << currentSusChar << " Evidence: " << currentEviChar << endl;
+                eviCurr = eviCurr->m_next;
+                susCurr = susCurr->m_next;
+                currentEviChar = eviCurr->m_data;
+                currentSusChar = susCurr->m_data;
+                matchesFound++;
+                if (matchesFound == targetSize){
+                    foundMatch = true;
+                }
+                //cout << "New evi curr char: " << eviCurr->m_data << endl;
+            }
+
+            if(foundMatch) {
+                susCurr = nullptr;
+            }else{
+                susCurr = originalSus->m_next;
+            }
+            eviCurr = evidence.m_head;
+            matchesFound = 1;
+            }
+        }
+    return foundMatch;
+}
+
+----------------------------------------------------------------------------------------------------------------------
+ENTIRE OLD WORKING with cout
